@@ -49,6 +49,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :production do
+  gem 'pg'
+end
+
 group :test do
   gem 'rspec-rails', '~> 3.6'
   gem 'rspec-activemodel-mocks', '= 1.0.1'
