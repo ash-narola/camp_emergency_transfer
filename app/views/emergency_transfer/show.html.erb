@@ -1,0 +1,80 @@
+<%= content_for :heading do %>
+  <%= "Patients summary - #{@patient.name}" %>
+<% end %>
+
+<%= content_for :button do %>
+  <div class="ml-auto">
+    <%= link_to 'Print', emergency_transfer_path(@patient.id, format: :pdf), class: "btn btn-success", target: '_blank' %>
+    <%= link_to 'Back', root_path, class: "btn btn-outline-dark" %>
+  </div>
+<% end %>
+
+<div class="col-12">
+  <table class="table table-bordered">
+      <tr class="summary-header"><td colspan="4"><b>Emergency Transfer Summary (Form 34L-D)</b></td></tr>
+
+      <tr><td colspan="4"><b>Transferring Facility</b></td></tr>
+      <tr>
+        <td colspan="1">Name<br /><br />
+          <span class="span-color"><%= @patient.facility.name %></span>
+        </td>
+        <td colspan="3">&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td colspan="4"><b>Patient Information</b></td>
+      </tr>
+
+      <tr>
+        <td>First Name<br /><br />
+          <span class="span-color"><%= @patient.first_name %></span>
+        </td>
+
+        <td>Middle Name<br /><br />
+          <span class="span-color"><%= @patient.middle_name %></span>
+        </td>
+
+        <td>Last Name<br /><br />
+          <span class="span-color"><%= @patient.last_name %></span>
+        </td>
+
+        <td>Medical Record (MR)<br /><br />
+          <span class="span-color"><%= @patient.mr %></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4"><b>Summary</b>
+          <br />
+          <br />
+          This <span class="span-color"><%= @patient.age %></span>
+          years old <span class="span-color"><%= @patient.gender %></span>
+          was admitted to <span class="span-color"><%= @patient.facility.name %></span>
+          on <span class="span-color"><%= @patient.admission.created_at.strftime('%Y-%m-%d') %></span>
+          at <span class="span-color"><%= @patient.admission.created_at.strftime('%H:%M') %></span>
+          due to <span class="span-color"><%= admission_diagnoses(@patient.admission)%></span>.
+
+          The observed symptoms on admission were
+          <span class="span-color"><%= admission_symptoms(@patient.admission)%></span>.
+
+          <span class="span-color"><%= admission_observations(@patient.admission)%></span>.
+
+          Upon asking about known allergies, the patient disclosed
+          <span class="span-color"><%= patient_allergies(@patient)%></span>.
+
+          Upon asking about chronic conditions, the patient disclosed
+          <span class="span-color"><%= patient_chronic_conditions(@patient)%></span>.
+
+          The patient was administered with
+          <span class="span-color"><%= patient_medications_orders(@patient)%></span>.
+
+          The staff performed
+          <span class="span-color"><%= patient_diagnostic_procedures(@patient)%></span>.
+
+          Our team proceeded to
+          <span class="span-color"><%= patient_treatments(@patient) %></span>.
+          </span>
+        </td>
+      </tr>
+  </table>
+</div>

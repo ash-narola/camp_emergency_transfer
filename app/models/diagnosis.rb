@@ -6,4 +6,7 @@ class Diagnosis < ApplicationRecord
   #
   belongs_to :diagnosable, polymorphic: true
 
+  def described_code
+    "#{description} (#{code})"
+  end
 end

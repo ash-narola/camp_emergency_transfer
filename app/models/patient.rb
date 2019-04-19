@@ -30,4 +30,20 @@ class Patient < ApplicationRecord
     :facility
   )
 
+  has_one(
+    :admission
+  )
+
+  def self.search(query)
+    where("first_name LIKE :search OR last_name LIKE :search OR middle_name LIKE :search", search: "%#{query}%")
+  end
+
+  def age
+    now = Time.now.utc.to_date
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
+
+  def name
+    "#{first_name} #{middle_name} #{last_name}"
+  end
 end

@@ -11,8 +11,14 @@
 
   <body>
     <%= render 'layouts/header' %>
-    <div class="container-fluid">
-      <%= yield %>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 my-5 d-flex">
+          <h3 class="display"><%= yield :heading %></h3>
+          <%= yield :button %>
+        </div>
+          <%= yield %>
+        <div>
     </div>
   </body>
 </html>
