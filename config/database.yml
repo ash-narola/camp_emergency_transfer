@@ -21,5 +21,8 @@ test:
   database: camp_emergency_transper_test
 
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
   database: camp_emergency_transper_prod
