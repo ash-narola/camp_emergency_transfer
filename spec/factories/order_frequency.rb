@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :order_frequency do
-    value { }
+    value {}
     unit { 0 }
   end
 end
